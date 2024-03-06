@@ -15,7 +15,7 @@ public class UsuarioController : ControllerBase
         _usuario = usuario;
     }
     [HttpPost("cadastrarusuario")]
-    public DTO_Reposta CadastrarUsuario(Usuario usuario)
+    public DTO_Reposta CadastrarUsuario(DTO_Usuario usuario)
     {
         var resposta = _usuario.CadastrarUsuario(usuario);
         return resposta;
