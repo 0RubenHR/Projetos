@@ -13,23 +13,44 @@ public class CUsuario : IUsuario
         _db = db;
     }
 
-    public DTO_Reposta CadastrarUsuario(Usuario usuario)
+    public DTO_Reposta CadastrarUsuario(DTO_Usuario usuario)
     {
         DTO_Reposta resposta = new DTO_Reposta();
         try
         {
-            if(usuario!=null)
+            if (usuario != null)
             {
-                _db.Usuarios.Add(usuario);
+                var NovoUser = new Usuario
+                {
+                    PrimeiroNome = usuario.PrimeiroNome,
+                    UltimoNome = usuario.UltimoNome,
+                    Foto = ConverterImagemToBase64(usuario.Foto),
+                    DataNascimento = usuario.DataNascimento
+                };
+                _db.TbUsuarios.Add(NovoUser);
                 _db.SaveChanges();
                 resposta.mensagem = "Sucesso";
                 return resposta;
             }
             resposta.mensagem = "Dados inválidos";
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             resposta.mensagem = ex.ToString();
         }
+        return resposta;
+    }
+    private string ConverterImagemToBase64(IFormFile file)
+    {
+        string resposta = string.Empty;
+        if (file == null)
+        {
+            return resposta;
+        }
+        var memoryStream = new MemoryStream();
+        file.CopyTo(memoryStream);
+        Byte[] ImageBytes = memoryStream.ToArray();
+        resposta = Convert.ToBase64String(ImageBytes);
         return resposta;
     }
 }

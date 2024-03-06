@@ -5,5 +5,5 @@ namespace Projetos.DAL.IRepository;
 
 public interface IUsuario
 {
-    DTO_Reposta CadastrarUsuario(Usuario usuario);
+    DTO_Reposta CadastrarUsuario(DTO_Usuario usuario);
 }
