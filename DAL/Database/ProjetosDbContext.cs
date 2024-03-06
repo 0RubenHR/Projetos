@@ -7,8 +7,8 @@ public class ProjetosDbContext : DbContext
 {
     private static string StringLocal = "Host = localhost; port= 3306; username = root; Database = dt_teste;";
     private static string StringPublica = "";
-    public DbSet<Usuario> Usuarios {get;set;}
-    public DbSet<Tarefa> Tarefas {get;set;}
+    public DbSet<Usuario> TbUsuarios {get;set;}
+    public DbSet<Tarefa> TbTarefas {get;set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
